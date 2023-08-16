@@ -13,7 +13,8 @@ const App = () => {
   ]);
 
   const addNewGoalHandler = (newGoal) => {
-    setCourseGoals(courseGoals.concat(newGoal));
+    // setCourseGoals(courseGoals.concat(newGoal)); This works as well but the other way below is good for when your current state depends on the previous state.
+    setCourseGoals((prevCourseGoals) => prevCourseGoals.concat(newGoal));
   };
 
 

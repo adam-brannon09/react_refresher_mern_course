@@ -1,21 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NewGoal.css";
 
 const NewGoal = (props) => {
+
+    const [enteredText, setEnteredText] = useState(" "); // [value, function to update value
+
+
     const addGoalHandler = (event) => {
         event.preventDefault();
-
         const newGoal = {
             id: Math.random().toString(),
-            text: "My new goal!"
+            text: enteredText
         };
+        //this resets the input box to blank after the goal is added
+        setEnteredText(" ");
+
         props.onAddGoal(newGoal);
     };
 
+    const textChangeHandler = (event) => {
+        //this is a react hook that gets user input from the text box
+        setEnteredText(event.target.value);
+    };
 
     return (
         <form className="new-goal" onSubmit={addGoalHandler}>
-            <input type="text" />
+            <input type="text" value={enteredText} onChange={textChangeHandler} />
             <button type="submit">Add Goal</button>
         </form>
     );
